@@ -1,0 +1,24 @@
+<!--这个Thymeleaf模板只是提供一个表单来获取用户名和密码，并将它们提交到“/login”。-->
+<!--根据配置，Spring Security提供了一个拦截该请求并验证用户的过滤器。 -->
+<!--如果用户未通过认证，该页面将重定向到“/ loginPage?error”，并在页面显示相应的错误消息。-->
+<!--注销成功后，我们的应用程序将发送到“/ loginPage?logout”，我们的页面显示相应的登出成功消息。-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Spring Security Hello World</title>
+    </head>
+    <body>
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form th:action="@{/login}" method="post">
+            <div><label>User Name: <input type="text" name="username"/></label></div>
+            <div><label>Password: <input type="password" name="password"/></label></div>
+            <div><input type="submit" value="Sign In"/></div>
+        </form>
+    </body>
+</html>
